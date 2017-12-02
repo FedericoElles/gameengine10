@@ -7,7 +7,11 @@
  - hide
  - play
  - stop
+ - repeat
+ - setContent
  - random
+ - animated
+ 
  
 */
 var ee = new EventEmitter();
@@ -115,3 +119,30 @@ function stop(){
   audios = [];
   //stop all videos
 }
+
+
+
+function repeat(callback, seconds){
+  //TODO: Add checks
+  seconds = seconds || 1;
+  var repeater = setInterval(callback, seconds*1000);
+  return {
+    stop: function(){
+      clearInterval(repeater);
+    }
+  }
+}
+
+function setContent(selector, value){
+  var element = document.querySelector(selector);
+  if (element){
+    element.innerHTML = value;
+  } else {
+    throw "Erster Parameter muss ein Selector für eine vorhandenes HTML Element sein, z.B. '#id' oder '.class' - aktuell wird kein Element gefunden."
+  }
+
+}
+
+
+//animation - envt if animation ends
+//Example: https://desandro.github.io/3dtransforms/examples/card-01.html

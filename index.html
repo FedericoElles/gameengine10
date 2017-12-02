@@ -90,7 +90,7 @@
     
     <hr>
     <h1>
-      Test
+      Funktions Tests
     </h1>
     
     <h2>
@@ -114,6 +114,25 @@
       VID abspielen
     </button>
 
+    
+    <h2>Wiederholen von Aktionen</h2>
+    
+    <button id="btn-start-timer">
+      Timer starten
+    </button>
+    
+    <button id="btn-stop-timer">
+      Timer stoppen
+    </button>
+    
+    
+    <div id="div-timer">
+      Nicht gestartet
+    </div>
+    
+    <br>
+    <hr>
+    <br>
     
   </body>
   
@@ -139,6 +158,31 @@
     });
   
     
+
+    clickable('#btn-start-timer', 'start-timer');
+    clickable('#btn-stop-timer', 'stop-timer');
+
+    
+    var seconds = 0;
+    var timer;
+    
+    on('start-timer', function(){
+      seconds = 0;
+      setContent('#div-timer', seconds);
+
+      timer = repeat(function(){
+          seconds= seconds + 1;
+          setContent('#div-timer', seconds);
+      }, 1);
+    });
+      
+    on('stop-timer', function(){
+      setContent('#div-timer', 'Timer gestoppt bei: ' + seconds);
+
+      timer.stop();
+    });
+    
+      
     
   </script>
   
