@@ -87,6 +87,60 @@
     
     
 <!-- -->
+    
+    <hr>
+    <h1>
+      Test
+    </h1>
+    
+    <h2>
+      MP3 abspielen
+    </h2>
+    
+    <button id="btn-play-mp3">
+      MP3 abspielen
+    </button>
+    <button id="btn-stop-mp3">
+      MP3 stoppen
+    </button>
+    
+    
+    <h2>
+      Video Abspielen
+    </h2>
+    
+    <video id="my-vid" width="400" height="300" src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
+    <button id="btn-play-vid">
+      VID abspielen
+    </button>
+
+    
   </body>
+  
+  <script>
+  
+    clickable('#btn-play-mp3', 'play-mp3');
+    clickable('#btn-stop-mp3', 'stop-mp3');
+   
+    
+    on('play-mp3', function(){
+        play('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+        console.log('Playing');
+    });
+    
+    on('stop-mp3', function(){
+      stop();
+    });
+  
+    clickable('#btn-play-vid', 'play-vid');
+    
+    on('play-vid', function(){
+      play('#my-vid');
+    });
+  
+    
+    
+  </script>
+  
 </html>
 <!---->

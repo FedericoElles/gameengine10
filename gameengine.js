@@ -5,7 +5,8 @@
  - on
  - show
  - hide
- - sound
+ - play
+ - stop
  - random
  
 */
@@ -74,4 +75,43 @@ function hide(selector){
 //show
 function show(selector){
   _showHide(selector, 'block');
+}
+
+//audio und video - play
+// https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3
+
+var audios = [];
+function play(selector){
+  //might be a link to a  mp3 file
+  if (selector && selector.indexOf('.mp3') >-1){
+    var aud = new Audio(selector)
+    audios.push(aud);
+    aud.play();
+  }
+  
+  //might be a video tag
+  if (selector){
+    var element = document.querySelector(selector);
+    if (element){
+      var playPromise = element.play();
+    }
+    if (playPromise !== undefined) {
+      playPromise.then(function() {
+        // Automatic playback started!
+      }).catch(function(error) {
+        console.log(error);
+        // Automatic playback failed.
+        // Show a UI element to let the user manually start playback.
+      });
+    }
+  }
+}
+
+function stop(){
+  //stop all audios
+  audios.forEach(function(elem){
+    elem.pause();
+  });
+  audios = [];
+  //stop all videos
 }
